@@ -3,7 +3,7 @@ This is a restoration project for the old linux console font: 'cybercafe.fnt'.
 ### .fnt
 ```
 cybercafe.fnt is a VGA raw bitmap which represents each character with a bit pattern, i.e.
-001100         11 \
+001100          11 
 010010         1  1
 011110  -->    1111
 010010         1  1
@@ -94,7 +94,7 @@ is inside the above one.
 #### Full code requirements
 numpy >= 2.3.3 \
 pillow >= 11.3.0 \
-shapely >= 2.1.2 \ 
+shapely >= 2.1.2 \
 svgwrite >= 1.4.3 
 
 ### Distribution Note
