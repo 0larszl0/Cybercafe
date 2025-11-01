@@ -5,16 +5,6 @@ import svgwrite
 from shapely.geometry import Polygon
 import os
 
-# CHARSET_SIZE = 256
-# EM = 1000  # default font thing to vectorise
-
-# cybercafe.fnt is a VGA raw bitmap which represents each character with a bit pattern, i.e.
-# 001100          11
-# 010010         1  1
-# 011110  -->    1111
-# 010010         1  1
-# turns out to look like an A
-
 
 def create_bitmap(glyph: bytes) -> List[List[int]]:
     """
