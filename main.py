@@ -250,28 +250,24 @@ class FntConverter:
         # viewBox specifies the original coordinate space the glyph would be mapped to; the size tells the svgwriter how much each dimension should be scaled up by
         drawing = svgwrite.Drawing(f"SVGs/Char-DEC{char_dec}.svg", viewBox=f"0 0 8 {self.__font_height}", size=(1000, int((self.__font_height / 8) * 1000)))
 
-        mask = drawing.mask(id=f"Char-DEC{char_dec}-mask")  # transparency map for main group; determines what is and what's not visible.
-        main_grp = drawing.g()  # creates a group for all the appropriate outlines.
+        # Fontforge doesn't handle masks, hence nonzero fill rule must be applied, note that for any shape inside a
+        # shape must be drawn in the opposite direction for it to be known as a hole.
+
+        full_svg_path = ""
 
         for i, route in enumerate(routes):
-            # - Create path for current route
-            # This involves two paths: one for the group, and another for the mask
-            svg_path = f"M {route[0][0]} {route[0][1]} L " + ' '.join([f"{x} {y}" for x, y in route[1:-1]]) + " Z"
-            g_path, m_path = drawing.path(d=svg_path, fill="black"), drawing.path(d=svg_path, fill="white")
+            if i in holes:
+                route = route[::-1]
 
-            if i in holes:  # check if current route index is a hole.
-                mask.add(g_path)  # add the group path to the mask, the black fill in this case marks transparency- i.e. to cut a hole
-                continue
+            full_svg_path += f"M {route[0][0]} {route[0][1]} L " + ' '.join([f"{x} {y}" for x, y in route[1:-1]]) + " Z "
 
-            main_grp.add(g_path)  # adds the group path to the group, where black is visible colour.
-            mask.add(m_path)  # add the mask path to the group, white fill shows that this path should remain visible
+        print(full_svg_path)
 
-        # At the end the mask and group are fully developed
-        main_grp["mask"] = f"url(#Char-DEC{char_dec}-mask)"  # add a reference of the mask to the group
-        drawing.add(main_grp)  # add the group to the drawing
-        drawing.add(mask)  # add the mask to the drawing, so that the group can successfully reference it.
+        if full_svg_path:
+            path = drawing.path(d=full_svg_path[:-1], fill="black", fill_rule="nonzero")
+            drawing.add(path)
 
-        drawing.save()  # create the svg
+        drawing.save()
 
 
     def create_svgs(self):
@@ -286,13 +282,13 @@ class FntConverter:
 
         # - Below is to test for a single character
 
-        # glyph = Glyph(self.__glyphs[56])
+        # glyph = Glyph(self.__glyphs[79])
         #
         # glyph_routes = glyph.scan_down()
         # glyph_holes = glyph.find_holes(glyph_routes)
         # print(glyph_holes)
         #
-        # self.draw_svg(glyph_routes, glyph_holes, 56)
+        # self.draw_svg(glyph_routes, glyph_holes, 79)
 
 
 if __name__ == "__main__":
