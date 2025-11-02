@@ -261,8 +261,6 @@ class FntConverter:
 
             full_svg_path += f"M {route[0][0]} {route[0][1]} L " + ' '.join([f"{x} {y}" for x, y in route[1:-1]]) + " Z "
 
-        print(full_svg_path)
-
         if full_svg_path:
             path = drawing.path(d=full_svg_path[:-1], fill="black", fill_rule="nonzero")
             drawing.add(path)
