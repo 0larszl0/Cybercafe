@@ -1,0 +1,30 @@
+# When you open a new fontforge template, go to File > Execute Script, and run everything between # ---- #
+
+# ------------------------------------------------------------------------------------- #
+
+import fontforge
+import os
+
+
+font = fontforge.font()
+svg_folder = "C:\\Users\\Richard\\Downloads\\SVGs(2)\\SVGs"
+
+for file in os.listdir(svg_folder):
+    dec_val = int(file.split('.')[0].split("DEC")[1])
+    try:
+        glyph = font.createChar(
+            dec_val,
+            chr(dec_val)
+        )
+    except ValueError:  # only occurs at a control point-- at an empty svg
+        continue
+
+    glyph.importOutlines(f"{svg_folder}\\{file}")
+
+# ------------------------------------------------------------------------------------- #
+
+# Once this script executes, you should have made another font .sfd file containing all the svgs in their correct
+# places. Now, select all of them using CTRL+A, and then go to Metrics and select Auto Width with the defaults.
+# This should now give them nice spacings between each other during testing.
+# On that note, during my own testing when going to Metrics > New Metrics Window, I found the space to be too short
+# by default, so I changed it manually to a width of 400; purely eyeballing it here, I thought this value felt right.
