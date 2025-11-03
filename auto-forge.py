@@ -7,7 +7,7 @@ import os
 
 
 font = fontforge.font()
-svg_folder = "C:\\Users\\Richard\\Downloads\\SVGs(2)\\SVGs"
+svg_folder = "/path/to/svg/folder"
 
 for file in os.listdir(svg_folder):
     dec_val = int(file.split('.')[0].split("DEC")[1])
@@ -28,3 +28,4 @@ for file in os.listdir(svg_folder):
 # This should now give them nice spacings between each other during testing.
 # On that note, during my own testing when going to Metrics > New Metrics Window, I found the space to be too short
 # by default, so I changed it manually to a width of 400; purely eyeballing it here, I thought this value felt right.
+
