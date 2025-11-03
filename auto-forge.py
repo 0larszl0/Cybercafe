@@ -5,21 +5,15 @@
 import fontforge
 import os
 
-
-font = fontforge.font()
+font = fontforge.font()  # create new .sfd
 svg_folder = "/path/to/svg/folder"
 
 for file in os.listdir(svg_folder):
-    dec_val = int(file.split('.')[0].split("DEC")[1])
-    try:
-        glyph = font.createChar(
-            dec_val,
-            chr(dec_val)
-        )
-    except ValueError:  # only occurs at a control point-- at an empty svg
-        continue
-
-    glyph.importOutlines(f"{svg_folder}\\{file}")
+    dec_val = int(file.split('.')[0].split("DEC")[1])  # gets the decimal value within the svg file's name
+    
+    if dec_val > 0:  # fontforge disallows adding a glyph for the NULL position.
+        glyph = font.createChar(dec_val, chr(dec_val))
+        glyph.importOutlines(f"{svg_folder}\\{file}")
 
 # ------------------------------------------------------------------------------------- #
 
@@ -32,3 +26,4 @@ for file in os.listdir(svg_folder):
 # To convert to TTC, the EM had to be a power of 2. This font's EM was originally 1000, however, by going to 
 # Element > Font Info > General, I changed this to 1024 using the dropdown. Fontforge would then auto transform 
 # everything appropriately.
+
