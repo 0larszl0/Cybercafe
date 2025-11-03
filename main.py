@@ -248,7 +248,7 @@ class FntConverter:
         :return: None, but this creates an image
         """
         # viewBox specifies the original coordinate space the glyph would be mapped to; the size tells the svgwriter how much each dimension should be scaled up by
-        drawing = svgwrite.Drawing(f"SVGs/Char-DEC{char_dec}.svg", viewBox=f"0 0 8 {self.__font_height}", size=(1000, int((self.__font_height / 8) * 1000)))
+        drawing = svgwrite.Drawing(f"SVGs/Char-DEC{char_dec}.svg", viewBox=f"0 0 8 {self.__font_height}", size=(1000, 1000))
 
         # Fontforge doesn't handle masks, hence nonzero fill rule must be applied, note that for any shape inside a
         # shape must be drawn in the opposite direction for it to be known as a hole.
