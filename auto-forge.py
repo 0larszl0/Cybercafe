@@ -29,3 +29,6 @@ for file in os.listdir(svg_folder):
 # On that note, during my own testing when going to Metrics > New Metrics Window, I found the space to be too short
 # by default, so I changed it manually to a width of 400; purely eyeballing it here, I thought this value felt right.
 
+# To convert to TTC, the EM had to be a power of 2. This font's EM was originally 1000, however, by going to 
+# Element > Font Info > General, I changed this to 1024 using the dropdown. Fontforge would then auto transform 
+# everything appropriately.
