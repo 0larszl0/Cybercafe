@@ -1,7 +1,7 @@
 # Cybercafe
 This is a restoration project for the old linux console font: 'cybercafe.fnt'.
 
-Feel free to download the cybercafe.ttc file, and use this vintage font!
+Feel free to download the cybercafe.ttc file to use this old-school font!
 
 ### .fnt
 
