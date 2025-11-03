@@ -1,5 +1,6 @@
 # Cybercafe
 This is a restoration project for the old linux console font: 'cybercafe.fnt'.
+
 ### .fnt
 
 cybercafe.fnt is a VGA raw bitmap which represents each character with a bit pattern, i.e.
@@ -117,6 +118,9 @@ Anyway, instead of manually adding each SVG into their respectable slot, copy th
 script and run it under File > Execute Script.
 For more information about how I configured everything in fontforge, it's commented inside the auto-forge.py file.
 (Don't worry! There's not of writing there :) )
+
+<img src="https://github.com/0larszl0/0larszl0/blob/main/RepositoryClips/cybercafe-screenshot.png">
+
 
 #### Libraries used
 To ensure these scripts behave as intended, ensure you meet the following requirement for each library used.
